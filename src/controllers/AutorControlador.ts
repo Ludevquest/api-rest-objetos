@@ -68,4 +68,22 @@ export default class AutorControlador {
 
     return res.status(204).send()
   }
+
+  deletar (req: Request, res: Response) {
+    const { id } = req.params
+
+    const autor = autores.findIndex((element) => {
+      return element.id === id
+    })
+
+    if (autor === -1) {
+      return res.status(404).json({
+        mensagem: 'Autor não encontrado'
+      })
+    }
+
+    autores.splice(autor, 1)
+
+    return res.status(204).send()
+  }
 }
