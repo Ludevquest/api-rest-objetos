@@ -81,6 +81,21 @@ export default class PostControlador {
   }
 
   deletar (req: Request, res: Response) {
+    const { id } = req.params
+
+    const post = posts.findIndex((e) => {
+      return e.id === id
+    })
+
+    if (post === -1) {
+      return res.status(404).json({
+        mensagem: 'A postagem não existe'
+      })
+    }
+
+    posts.splice(post, 1)
+
+    return res.status(204).send()
 }
 
 }
